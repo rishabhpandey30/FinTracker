@@ -2,6 +2,13 @@
 
 A modern, full-featured personal finance tracker built with React, Firebase, and Recharts.
 
+
+## 🌐 Live Demo
+
+🚀 **Visit the Live Website:**  
+👉 [Click Here to View Live Dashboard](https://fin-tracker-dev.vercel.app/)
+
+
 ## ✨ Features
 
 - 🔐 Firebase Email/Password Authentication
@@ -167,6 +174,3 @@ netlify deploy --prod --dir=dist
   ```
   Then reference them in `config.js` as `import.meta.env.VITE_FIREBASE_API_KEY`
 
-## 📄 License
-
-MIT
