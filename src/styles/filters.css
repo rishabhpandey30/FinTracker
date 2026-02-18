@@ -1,0 +1,101 @@
+/* ── Filters Bar ── */
+.filters-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    box-shadow: var(--shadow-card);
+    flex-wrap: wrap;
+    animation: fadeInUp 0.4s ease 0.1s both;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 180px;
+}
+
+.filter-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.filter-input,
+.filter-select {
+    flex: 1;
+    padding: 9px 12px;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    transition: all var(--transition);
+    min-width: 0;
+}
+
+.filter-input:focus,
+.filter-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+    background: var(--bg-card);
+}
+
+.filter-input::placeholder {
+    color: var(--text-muted);
+}
+
+.filter-select option {
+    background: var(--bg-card);
+    color: var(--text-primary);
+}
+
+.filter-date {
+    max-width: 140px;
+}
+
+.filter-sep {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.filter-clear {
+    padding: 9px 14px;
+    background: var(--expense-bg);
+    color: var(--expense);
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.filter-clear:hover {
+    background: var(--expense);
+    color: #fff;
+    border-color: var(--expense);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .filters-bar {
+        padding: 12px 16px;
+        gap: 10px;
+    }
+
+    .filter-group {
+        min-width: 100%;
+    }
+
+    .filter-date {
+        max-width: none;
+    }
+}

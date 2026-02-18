@@ -1,0 +1,155 @@
+/* ── Modal Backdrop ── */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+}
+
+/* ── Modal Card ── */
+.modal-card {
+    width: 100%;
+    max-width: 500px;
+    background: var(--bg-modal);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-modal);
+    animation: scaleIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 28px 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-header h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.modal-close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.modal-close:hover {
+    background: var(--expense-bg);
+    border-color: var(--expense);
+    color: var(--expense);
+}
+
+/* ── Modal Form ── */
+.modal-form {
+    padding: 24px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.modal-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.modal-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.modal-form-group label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.modal-form-group input,
+.modal-form-group select {
+    padding: 12px 14px;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: all var(--transition);
+    width: 100%;
+}
+
+.modal-form-group input:focus,
+.modal-form-group select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+    background: var(--bg-card);
+}
+
+.modal-form-group input::placeholder {
+    color: var(--text-muted);
+}
+
+.modal-form-group select option {
+    background: var(--bg-card);
+    color: var(--text-primary);
+}
+
+.field-error {
+    font-size: 0.75rem;
+    color: var(--expense);
+    margin-top: 2px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.modal-actions .btn-secondary {
+    flex: 0 0 auto;
+    width: auto;
+    padding: 13px 20px;
+}
+
+.modal-actions .btn-primary {
+    flex: 1;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    .modal-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-card {
+        border-radius: var(--radius-lg);
+    }
+
+    .modal-header,
+    .modal-form {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}

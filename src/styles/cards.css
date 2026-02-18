@@ -1,0 +1,330 @@
+/* ── Summary Cards Grid ── */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.summary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.4s ease both;
+}
+
+.summary-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.summary-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.summary-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.summary-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.card-balance::before {
+    background: linear-gradient(90deg, var(--accent), #00e5b0);
+}
+
+.card-income::before {
+    background: linear-gradient(90deg, #00c896, #34d399);
+}
+
+.card-expense::before {
+    background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+}
+
+.summary-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.card-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.card-icon-wrap {
+    font-size: 1.4rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-input);
+    border-radius: var(--radius-sm);
+}
+
+.card-amount {
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+    font-variant-numeric: tabular-nums;
+}
+
+.card-balance .card-amount {
+    color: var(--accent);
+}
+
+.card-income .card-amount {
+    color: var(--income);
+}
+
+.card-expense .card-amount {
+    color: var(--expense);
+}
+
+/* Progress bar */
+.card-bar {
+    height: 4px;
+    background: var(--bg-input);
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.card-bar-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-balance .card-bar-fill {
+    background: linear-gradient(90deg, var(--accent), #00e5b0);
+}
+
+.card-income .card-bar-fill {
+    background: var(--income);
+}
+
+.card-expense .card-bar-fill {
+    background: var(--expense);
+}
+
+/* ── Transaction List ── */
+.transaction-section {
+    animation: fadeInUp 0.4s ease 0.2s both;
+}
+
+.transaction-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ── Transaction Card ── */
+.tx-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    box-shadow: var(--shadow-card);
+    transition: all var(--transition);
+    animation: fadeInUp 0.3s ease both;
+    position: relative;
+    overflow: hidden;
+}
+
+.tx-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    border-radius: 0 2px 2px 0;
+}
+
+.tx-income::before {
+    background: var(--income);
+}
+
+.tx-expense::before {
+    background: var(--expense);
+}
+
+.tx-card:hover {
+    transform: translateX(4px);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: var(--shadow);
+}
+
+.tx-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-input);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.tx-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.tx-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 6px;
+}
+
+.tx-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tx-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 99px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.badge-income {
+    background: var(--income-bg);
+    color: var(--income);
+}
+
+.badge-expense {
+    background: var(--expense-bg);
+    color: var(--expense);
+}
+
+.tx-date {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.tx-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.tx-amount {
+    font-size: 1rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.3px;
+}
+
+.amount-income {
+    color: var(--income);
+}
+
+.amount-expense {
+    color: var(--expense);
+}
+
+.tx-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.btn-edit,
+.btn-delete,
+.btn-cancel {
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--bg-input);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.btn-edit:hover {
+    background: rgba(0, 200, 150, 0.15);
+    border-color: var(--accent);
+}
+
+.btn-delete:hover {
+    background: var(--expense-bg);
+    border-color: var(--expense);
+}
+
+.btn-confirm {
+    width: auto;
+    padding: 0 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: var(--expense-bg);
+    border-color: var(--expense);
+    color: var(--expense);
+}
+
+.btn-cancel:hover {
+    background: var(--bg-card-hover);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tx-card {
+        padding: 14px 16px;
+        gap: 12px;
+    }
+
+    .card-amount {
+        font-size: 1.35rem;
+    }
+}
