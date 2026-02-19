@@ -1,15 +1,18 @@
-/* ── Filters Bar ── */
+/* ============================================================
+   FILTERS BAR — Premium Fintech Toolbar
+   ============================================================ */
+
 .filters-bar {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 14px 20px;
+    padding: 12px 16px;
     box-shadow: var(--shadow-card);
     flex-wrap: wrap;
-    animation: fadeInUp 0.4s ease 0.1s both;
+    animation: fadeInUp 0.4s ease 0.12s both;
 }
 
 .filter-group {
@@ -17,23 +20,35 @@
     align-items: center;
     gap: 8px;
     flex: 1;
-    min-width: 180px;
+    min-width: 160px;
+    position: relative;
 }
 
-.filter-icon {
-    font-size: 1rem;
-    flex-shrink: 0;
+.filter-group-icon {
+    position: absolute;
+    left: 10px;
+    color: var(--text-muted);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+.filter-group-icon svg {
+    width: 14px;
+    height: 14px;
 }
 
 .filter-input,
 .filter-select {
     flex: 1;
-    padding: 9px 12px;
+    padding: 9px 12px 9px 32px;
     background: var(--bg-input);
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-2);
     border-radius: var(--radius-sm);
     color: var(--text-primary);
-    font-size: 0.875rem;
+    font-size: 0.84rem;
+    font-family: "Inter", sans-serif;
     transition: all var(--transition);
     min-width: 0;
 }
@@ -43,6 +58,7 @@
     border-color: var(--accent);
     box-shadow: 0 0 0 3px var(--accent-glow);
     background: var(--bg-card);
+    outline: none;
 }
 
 .filter-input::placeholder {
@@ -60,22 +76,30 @@
 
 .filter-sep {
     color: var(--text-muted);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     flex-shrink: 0;
 }
 
 .filter-clear {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     padding: 9px 14px;
     background: var(--expense-bg);
     color: var(--expense);
-    border: 1px solid rgba(255, 107, 107, 0.3);
+    border: 1px solid var(--expense-border);
     border-radius: var(--radius-sm);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 600;
     cursor: pointer;
     transition: all var(--transition);
     white-space: nowrap;
     flex-shrink: 0;
+}
+
+.filter-clear svg {
+    width: 12px;
+    height: 12px;
 }
 
 .filter-clear:hover {
@@ -84,18 +108,53 @@
     border-color: var(--expense);
 }
 
-/* ── Responsive ── */
-@media (max-width: 768px) {
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 900px) {
     .filters-bar {
-        padding: 12px 16px;
-        gap: 10px;
+        padding: 12px 14px;
+    }
+}
+
+/* Mobile — stack everything */
+@media (max-width: 700px) {
+    .filters-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
     }
 
     .filter-group {
         min-width: 100%;
+        width: 100%;
+        flex: none;
     }
 
     .filter-date {
         max-width: none;
+        flex: 1;
+    }
+
+    .filter-input,
+    .filter-select {
+        width: 100%;
+    }
+
+    .filter-clear {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Very small — shrink font */
+@media (max-width: 400px) {
+
+    .filter-input,
+    .filter-select {
+        font-size: 0.8rem;
+        padding: 8px 10px 8px 30px;
     }
 }

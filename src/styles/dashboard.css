@@ -1,44 +1,93 @@
-/* ── Dashboard Layout ── */
+/* ============================================================
+   DASHBOARD LAYOUT — Premium Fintech SaaS
+   ============================================================ */
+
+/* ── Page Shell (wraps sidebar + content) ── */
 .dashboard-page {
+    display: flex;
     min-height: 100vh;
     background: var(--bg-primary);
 }
 
-.dashboard-main {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 32px 24px 120px;
+/* ── Content Area (right of sidebar) ── */
+.dashboard-content {
+    flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    animation: fadeInUp 0.4s ease;
 }
 
-.dashboard-header h1 {
-    font-size: 1.8rem;
+/* ── Scrollable Main ── */
+.dashboard-main {
+    flex: 1;
+    padding: 28px 32px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    animation: fadeIn 0.3s ease;
+}
+
+/* ── Dashboard Header ── */
+.dashboard-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.dashboard-greeting {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.dashboard-title {
+    font-family: "Outfit", sans-serif;
+    font-size: 1.75rem;
     font-weight: 800;
     color: var(--text-primary);
     letter-spacing: -0.5px;
+    line-height: 1.2;
 }
 
-.dashboard-header p {
-    font-size: 0.9rem;
+.dashboard-title span {
+    background: linear-gradient(135deg, var(--accent), var(--indigo));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.dashboard-subtitle {
+    font-size: 0.875rem;
     color: var(--text-secondary);
     margin-top: 4px;
+}
+
+.header-date {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 99px;
+    white-space: nowrap;
 }
 
 /* ── Floating Action Button ── */
 .fab {
     position: fixed;
-    bottom: 32px;
-    right: 32px;
-    width: 58px;
-    height: 58px;
+    bottom: 28px;
+    right: 28px;
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
     color: #fff;
-    font-size: 1.6rem;
-    font-weight: 300;
     border: none;
     cursor: pointer;
     box-shadow: 0 6px 24px var(--accent-glow), 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -47,20 +96,22 @@
     justify-content: center;
     z-index: 90;
     transition: all var(--transition);
+    display: none;
+    /* Hidden on desktop — use topbar button instead */
+}
+
+.fab svg {
+    width: 22px;
+    height: 22px;
 }
 
 .fab:hover {
-    transform: scale(1.12) rotate(90deg);
-    box-shadow: 0 10px 32px var(--accent-glow);
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 0 12px 32px var(--accent-glow);
 }
 
 .fab:active {
     transform: scale(0.96) rotate(90deg);
-}
-
-.fab-icon {
-    line-height: 1;
-    margin-top: -1px;
 }
 
 /* ── Section Headers ── */
@@ -68,62 +119,178 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
-.section-header h2 {
-    font-size: 1.15rem;
+.section-title {
+    font-family: "Outfit", sans-serif;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text-primary);
+    letter-spacing: -0.2px;
+}
+
+.section-subtitle {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 2px;
 }
 
 .tx-count {
-    font-size: 0.8rem;
+    font-size: 0.72rem;
+    font-weight: 600;
     color: var(--text-secondary);
     background: var(--bg-card);
     border: 1px solid var(--border);
     padding: 4px 10px;
     border-radius: 99px;
+    letter-spacing: 0.3px;
 }
 
 /* ── Empty State ── */
 .empty-state {
     text-align: center;
-    padding: 60px 24px;
+    padding: 64px 24px;
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-card);
+    animation: fadeInUp 0.4s ease;
 }
 
-.empty-icon {
-    font-size: 3.5rem;
-    margin-bottom: 16px;
-    filter: grayscale(0.3);
+.empty-icon-wrap {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-lg);
+    background: var(--accent-light);
+    border: 1px solid var(--border-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+}
+
+.empty-icon-wrap svg {
+    width: 28px;
+    height: 28px;
+    color: var(--accent);
 }
 
 .empty-state h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-family: "Outfit", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .empty-state p {
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
+    max-width: 300px;
+    margin: 0 auto;
 }
 
-/* ── Responsive ── */
-@media (max-width: 768px) {
+.empty-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff;
+    font-size: 0.84rem;
+    font-weight: 600;
+    border-radius: 99px;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition);
+    box-shadow: 0 4px 14px var(--accent-glow);
+}
+
+.empty-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px var(--accent-glow);
+}
+
+.empty-cta svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 1100px) {
     .dashboard-main {
-        padding: 20px 16px 100px;
+        padding: 24px 24px 60px;
         gap: 24px;
     }
 
+    .dashboard-title {
+        font-size: 1.55rem;
+    }
+}
+
+/* Mobile — sidebar hides, content takes full width */
+@media (max-width: 900px) {
+    .dashboard-page {
+        flex-direction: column;
+    }
+
+    .dashboard-main {
+        padding: 20px 16px 100px;
+        gap: 20px;
+    }
+
     .fab {
-        bottom: 24px;
-        right: 20px;
-        width: 52px;
-        height: 52px;
+        display: flex;
+        bottom: 20px;
+        right: 16px;
+    }
+
+    .dashboard-title {
+        font-size: 1.4rem;
+    }
+
+    .topbar {
+        position: sticky;
+        top: 0;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 640px) {
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .header-date {
+        display: none;
+    }
+
+    .dashboard-title {
+        font-size: 1.25rem;
+    }
+
+    .section-header {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
+
+/* Very small */
+@media (max-width: 420px) {
+    .dashboard-main {
+        padding: 16px 12px 100px;
+        gap: 16px;
+    }
+
+    .dashboard-title {
+        font-size: 1.1rem;
     }
 }

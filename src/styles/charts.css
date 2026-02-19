@@ -1,70 +1,374 @@
-/* ── Charts Section ── */
+/* ============================================================
+   CHARTS — Premium Analytics Section
+   ============================================================ */
+
 .charts-section {
-    animation: fadeInUp 0.4s ease 0.15s both;
+    animation: fadeInUp 0.4s ease 0.16s both;
+    margin-bottom: 32px;
+}
+
+/* ── Section header ── */
+.charts-section-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    gap: 12px;
 }
 
 .charts-title {
+    font-family: "Outfit", sans-serif;
     font-size: 1.15rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
 }
 
+.charts-subtitle-text {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 3px;
+}
+
+.charts-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 4px 12px;
+    border-radius: 99px;
+    border: 1px solid var(--border-accent);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ── Charts Grid ── */
 .charts-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 16px;
 }
 
+/* ── Chart Card ── */
 .chart-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: 24px;
     box-shadow: var(--shadow-card);
-    transition: all var(--transition);
+    transition: box-shadow var(--transition), border-color var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle top accent stripe */
+.chart-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+    opacity: 0.5;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .chart-card:hover {
     box-shadow: var(--shadow);
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--border-2);
 }
 
-.chart-subtitle {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    margin-bottom: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+/* ── Chart Card Header ── */
+.chart-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 10px;
 }
 
-.chart-empty {
-    height: 280px;
+.chart-card-title-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.chart-type-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
+    background: var(--accent-light);
+    flex-shrink: 0;
+}
+
+.chart-type-icon svg {
+    width: 16px;
+    height: 16px;
+    color: var(--accent);
+    stroke: var(--accent);
+}
+
+.chart-subtitle {
+    font-family: "Outfit", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.1px;
+    line-height: 1.3;
+}
+
+.chart-period {
+    font-size: 0.7rem;
     color: var(--text-muted);
-    font-size: 0.875rem;
+    margin-top: 3px;
 }
 
-/* Recharts overrides */
-.recharts-tooltip-wrapper .recharts-default-tooltip {
-    background: var(--bg-card) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: var(--radius-sm) !important;
-    box-shadow: var(--shadow) !important;
-    color: var(--text-primary) !important;
+.chart-total-badge {
+    font-family: "Outfit", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--expense);
+    background: var(--expense-bg);
+    border: 1px solid var(--expense-border);
+    padding: 4px 10px;
+    border-radius: 99px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
-.recharts-legend-item-text {
-    color: var(--text-secondary) !important;
-    font-size: 0.8rem !important;
+/* Compact legend in area chart header */
+.chart-header-legend {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
 }
 
-/* ── Responsive ── */
+.chart-legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.chart-legend-text {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-right: 6px;
+}
+
+/* ── Donut layout ── */
+.chart-body-donut {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.donut-wrap {
+    /* recharts donut takes full width */
+    width: 100%;
+}
+
+/* ── Pie Legend ── */
+.pie-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 180px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.pie-legend::-webkit-scrollbar {
+    width: 3px;
+}
+
+.pie-legend-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: var(--radius-xs);
+    transition: background var(--transition);
+}
+
+.pie-legend-row:hover {
+    background: var(--bg-card-hover);
+}
+
+.pie-legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.pie-legend-name {
+    flex: 1;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pie-legend-pct {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    min-width: 30px;
+    text-align: right;
+}
+
+.pie-legend-val {
+    font-family: "Outfit", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    min-width: 52px;
+    text-align: right;
+}
+
+/* ── Area chart body ── */
+.chart-body-area {
+    margin: 0 -4px;
+}
+
+/* ── Empty State ── */
+.chart-empty {
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.chart-empty-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--bg-input);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
+.chart-empty-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--text-muted);
+}
+
+.chart-empty p {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.chart-empty span {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+/* ── Custom Tooltip ── */
+.chart-tooltip {
+    background: var(--bg-card);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    box-shadow: var(--shadow);
+    min-width: 140px;
+}
+
+.chart-tooltip-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+    font-family: "Inter", sans-serif;
+}
+
+.chart-tooltip-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 4px;
+}
+
+.chart-tooltip-row:last-child {
+    margin-bottom: 0;
+}
+
+.chart-tooltip-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.chart-tooltip-name {
+    flex: 1;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    font-family: "Inter", sans-serif;
+}
+
+.chart-tooltip-value {
+    font-family: "Outfit", sans-serif;
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* ── Recharts base overrides ── */
+.recharts-text,
+.recharts-cartesian-axis-tick-value {
+    fill: var(--text-muted) !important;
+    font-size: 11px !important;
+    font-family: "Inter", sans-serif !important;
+}
+
+.recharts-cartesian-grid-horizontal line {
+    stroke: var(--border) !important;
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+    .chart-card {
+        padding: 20px;
+    }
+}
+
 @media (max-width: 900px) {
     .charts-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .chart-card {
+        padding: 16px;
+    }
+
+    .charts-title {
+        font-size: 1rem;
+    }
+
+    .chart-subtitle {
+        font-size: 0.82rem;
     }
 }

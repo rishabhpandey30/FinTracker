@@ -1,20 +1,26 @@
+/* ============================================================
+   SUMMARY CARDS & TRANSACTION CARDS — Premium Fintech
+   ============================================================ */
+
 /* ── Summary Cards Grid ── */
 .summary-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 16px;
 }
 
+/* ── Summary Card ── */
 .summary-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 24px;
+    padding: 22px 24px;
     box-shadow: var(--shadow-card);
     transition: all var(--transition);
     position: relative;
     overflow: hidden;
-    animation: fadeInUp 0.4s ease both;
+    animation: fadeInUp 0.45s ease both;
+    cursor: default;
 }
 
 .summary-card:nth-child(1) {
@@ -22,74 +28,128 @@
 }
 
 .summary-card:nth-child(2) {
-    animation-delay: 0.1s;
+    animation-delay: 0.12s;
 }
 
 .summary-card:nth-child(3) {
-    animation-delay: 0.15s;
+    animation-delay: 0.19s;
 }
 
+/* Gradient top border */
 .summary-card::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
+    height: 2px;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .card-balance::before {
-    background: linear-gradient(90deg, var(--accent), #00e5b0);
+    background: linear-gradient(90deg, var(--accent), var(--indigo));
 }
 
 .card-income::before {
-    background: linear-gradient(90deg, #00c896, #34d399);
+    background: linear-gradient(90deg, var(--income), #34d399);
 }
 
 .card-expense::before {
-    background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+    background: linear-gradient(90deg, var(--expense), #fb7185);
+}
+
+/* Background glow orb */
+.summary-card::after {
+    content: "";
+    position: absolute;
+    top: -32px;
+    right: -24px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    opacity: 0.06;
+    pointer-events: none;
+    transition: opacity var(--transition-slow);
+}
+
+.card-balance::after {
+    background: var(--accent);
+}
+
+.card-income::after {
+    background: var(--income);
+}
+
+.card-expense::after {
+    background: var(--expense);
 }
 
 .summary-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
     box-shadow: var(--shadow);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: var(--border-2);
 }
 
+.summary-card:hover::after {
+    opacity: 0.12;
+}
+
+/* ── Card Header ── */
 .card-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 .card-label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text-secondary);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.8px;
 }
 
 .card-icon-wrap {
-    font-size: 1.4rem;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-input);
     border-radius: var(--radius-sm);
+    flex-shrink: 0;
 }
 
+.card-icon-wrap svg {
+    width: 18px;
+    height: 18px;
+}
+
+.card-balance .card-icon-wrap {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+.card-income .card-icon-wrap {
+    background: var(--income-bg);
+    color: var(--income);
+}
+
+.card-expense .card-icon-wrap {
+    background: var(--expense-bg);
+    color: var(--expense);
+}
+
+/* ── Card Amount ── */
 .card-amount {
-    font-size: 1.65rem;
+    font-family: "Outfit", sans-serif;
+    font-size: 1.7rem;
     font-weight: 800;
     color: var(--text-primary);
-    letter-spacing: -0.5px;
-    margin-bottom: 16px;
+    letter-spacing: -0.8px;
+    margin-bottom: 14px;
     font-variant-numeric: tabular-nums;
+    line-height: 1;
 }
 
 .card-balance .card-amount {
@@ -104,10 +164,31 @@
     color: var(--expense);
 }
 
-/* Progress bar */
+/* ── Progress Bar (subtle) ── */
+.card-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-trend {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.card-trend svg {
+    width: 12px;
+    height: 12px;
+}
+
 .card-bar {
-    height: 4px;
-    background: var(--bg-input);
+    flex: 1;
+    height: 3px;
+    background: var(--border);
     border-radius: 99px;
     overflow: hidden;
 }
@@ -115,41 +196,41 @@
 .card-bar-fill {
     height: 100%;
     border-radius: 99px;
-    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-balance .card-bar-fill {
-    background: linear-gradient(90deg, var(--accent), #00e5b0);
+    background: linear-gradient(90deg, var(--accent), var(--indigo));
 }
 
 .card-income .card-bar-fill {
-    background: var(--income);
+    background: linear-gradient(90deg, var(--income), #34d399);
 }
 
 .card-expense .card-bar-fill {
-    background: var(--expense);
+    background: linear-gradient(90deg, var(--expense), #fb7185);
 }
 
 /* ── Transaction List ── */
 .transaction-section {
-    animation: fadeInUp 0.4s ease 0.2s both;
+    animation: fadeInUp 0.4s ease 0.22s both;
 }
 
 .transaction-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 /* ── Transaction Card ── */
 .tx-card {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 16px 20px;
+    padding: 14px 18px;
     box-shadow: var(--shadow-card);
     transition: all var(--transition);
     animation: fadeInUp 0.3s ease both;
@@ -157,98 +238,98 @@
     overflow: hidden;
 }
 
-.tx-card::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    border-radius: 0 2px 2px 0;
-}
-
-.tx-income::before {
-    background: var(--income);
-}
-
-.tx-expense::before {
-    background: var(--expense);
-}
-
 .tx-card:hover {
-    transform: translateX(4px);
-    border-color: rgba(255, 255, 255, 0.12);
+    background: var(--bg-card-hover);
+    border-color: var(--border-2);
     box-shadow: var(--shadow);
+    transform: translateX(2px);
 }
 
+/* ── Icon ── */
 .tx-icon-wrap {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     border-radius: var(--radius-sm);
-    background: var(--bg-input);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
+    font-size: 1.15rem;
     flex-shrink: 0;
+    transition: all var(--transition);
 }
 
+.tx-income .tx-icon-wrap {
+    background: var(--income-bg);
+    border: 1px solid var(--income-border);
+}
+
+.tx-expense .tx-icon-wrap {
+    background: var(--expense-bg);
+    border: 1px solid var(--expense-border);
+}
+
+/* ── Info ── */
 .tx-info {
     flex: 1;
     min-width: 0;
 }
 
 .tx-title {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: var(--text-primary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
+    line-height: 1.3;
 }
 
 .tx-meta {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     flex-wrap: wrap;
 }
 
 .tx-badge {
-    font-size: 0.7rem;
-    font-weight: 600;
+    font-size: 0.67rem;
+    font-weight: 700;
     padding: 2px 8px;
     border-radius: 99px;
     text-transform: uppercase;
-    letter-spacing: 0.4px;
+    letter-spacing: 0.5px;
 }
 
 .badge-income {
     background: var(--income-bg);
     color: var(--income);
+    border: 1px solid var(--income-border);
 }
 
 .badge-expense {
     background: var(--expense-bg);
     color: var(--expense);
+    border: 1px solid var(--expense-border);
 }
 
 .tx-date {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     color: var(--text-muted);
 }
 
+/* ── Right section ── */
 .tx-right {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 10px;
+    gap: 8px;
     flex-shrink: 0;
 }
 
 .tx-amount {
-    font-size: 1rem;
+    font-family: "Outfit", sans-serif;
+    font-size: 0.98rem;
     font-weight: 700;
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.3px;
@@ -264,67 +345,132 @@
 
 .tx-actions {
     display: flex;
-    gap: 6px;
+    gap: 5px;
+    opacity: 0;
+    transition: opacity var(--transition);
 }
 
+.tx-card:hover .tx-actions {
+    opacity: 1;
+}
+
+/* ── Action Buttons ── */
 .btn-edit,
 .btn-delete,
 .btn-cancel {
-    width: 30px;
-    height: 30px;
-    border-radius: var(--radius-sm);
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-xs);
     border: 1px solid var(--border);
     background: var(--bg-input);
-    font-size: 0.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all var(--transition);
+    flex-shrink: 0;
+}
+
+.btn-edit svg,
+.btn-delete svg,
+.btn-cancel svg {
+    width: 13px;
+    height: 13px;
+}
+
+.btn-edit {
+    color: var(--text-muted);
 }
 
 .btn-edit:hover {
-    background: rgba(0, 200, 150, 0.15);
-    border-color: var(--accent);
+    background: var(--accent-light);
+    border-color: var(--border-accent);
+    color: var(--accent);
+}
+
+.btn-delete {
+    color: var(--text-muted);
 }
 
 .btn-delete:hover {
     background: var(--expense-bg);
-    border-color: var(--expense);
+    border-color: var(--expense-border);
+    color: var(--expense);
 }
 
 .btn-confirm {
     width: auto;
     padding: 0 10px;
-    font-size: 0.7rem;
-    font-weight: 600;
+    font-size: 0.68rem;
+    font-weight: 700;
     background: var(--expense-bg);
-    border-color: var(--expense);
+    border-color: var(--expense-border);
     color: var(--expense);
+    letter-spacing: 0.3px;
 }
 
 .btn-cancel:hover {
     background: var(--bg-card-hover);
 }
 
-/* ── Responsive ── */
-@media (max-width: 900px) {
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+
+/* Tablet — 2-col summary cards */
+@media (max-width: 1000px) {
     .summary-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
+/* Mobile — 1-col everything */
 @media (max-width: 600px) {
     .summary-grid {
         grid-template-columns: 1fr;
     }
 
+    .summary-card {
+        padding: 18px 20px;
+    }
+
+    .card-amount {
+        font-size: 1.5rem;
+    }
+
     .tx-card {
-        padding: 14px 16px;
+        padding: 12px 14px;
         gap: 12px;
+    }
+
+    /* Always show actions on touch devices */
+    .tx-actions {
+        opacity: 1;
+    }
+
+    .tx-amount {
+        font-size: 0.95rem;
+    }
+}
+
+/* Very small */
+@media (max-width: 400px) {
+    .summary-card {
+        padding: 16px;
     }
 
     .card-amount {
         font-size: 1.35rem;
+    }
+
+    .tx-icon-wrap {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+
+    .tx-badge {
+        font-size: 0.6rem;
+        padding: 2px 6px;
     }
 }

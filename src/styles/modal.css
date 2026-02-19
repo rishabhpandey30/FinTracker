@@ -1,9 +1,14 @@
-/* ── Modal Backdrop ── */
+/* ============================================================
+   MODAL — Premium Fintech Form Modal
+   ============================================================ */
+
+/* ── Backdrop ── */
 .modal-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.65);
-    backdrop-filter: blur(6px);
+    background: var(--bg-overlay);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,37 +20,70 @@
 /* ── Modal Card ── */
 .modal-card {
     width: 100%;
-    max-width: 500px;
+    max-width: 480px;
     background: var(--bg-modal);
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-2);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-modal);
-    animation: scaleIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: scaleIn 0.22s cubic-bezier(0.34, 1.4, 0.64, 1);
     overflow: hidden;
 }
 
+/* ── Modal Header ── */
 .modal-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 24px 28px 20px;
+    padding: 22px 28px 18px;
     border-bottom: 1px solid var(--border);
+    background: var(--bg-card-2);
+}
+
+.modal-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-header-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-xs);
+    background: var(--accent-light);
+    border: 1px solid var(--border-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+}
+
+.modal-header-icon svg {
+    width: 16px;
+    height: 16px;
 }
 
 .modal-header h3 {
-    font-size: 1.1rem;
+    font-family: "Outfit", sans-serif;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text-primary);
+    letter-spacing: -0.2px;
+}
+
+.modal-header p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 1px;
 }
 
 .modal-close {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: var(--bg-input);
     border: 1px solid var(--border);
-    color: var(--text-secondary);
-    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,48 +93,121 @@
 
 .modal-close:hover {
     background: var(--expense-bg);
-    border-color: var(--expense);
+    border-color: var(--expense-border);
     color: var(--expense);
+}
+
+/* ── Type Toggle ── */
+.modal-type-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 16px 28px 0;
+}
+
+.type-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 14px;
+    border-radius: var(--radius);
+    border: 1.5px solid var(--border-2);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.type-option svg {
+    width: 15px;
+    height: 15px;
+}
+
+.type-option.income.active {
+    border-color: var(--income);
+    background: var(--income-bg);
+    color: var(--income);
+}
+
+.type-option.expense.active {
+    border-color: var(--expense);
+    background: var(--expense-bg);
+    color: var(--expense);
+}
+
+.type-option:not(.active):hover {
+    border-color: var(--border-accent);
+    background: var(--accent-light-2);
+    color: var(--text-primary);
 }
 
 /* ── Modal Form ── */
 .modal-form {
-    padding: 24px 28px 28px;
+    padding: 20px 28px 28px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 16px;
 }
 
 .modal-form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 14px;
 }
 
 .modal-form-group {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 5px;
 }
 
 .modal-form-group label {
-    font-size: 0.78rem;
+    font-size: 0.73rem;
     font-weight: 600;
     color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+}
+
+.modal-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.modal-input-icon {
+    position: absolute;
+    left: 12px;
+    pointer-events: none;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+}
+
+.modal-input-icon svg {
+    width: 14px;
+    height: 14px;
 }
 
 .modal-form-group input,
 .modal-form-group select {
-    padding: 12px 14px;
+    width: 100%;
+    padding: 11px 12px 11px 36px;
     background: var(--bg-input);
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-2);
     border-radius: var(--radius-sm);
     color: var(--text-primary);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     transition: all var(--transition);
-    width: 100%;
+}
+
+/* Amount field — bigger text */
+.modal-form-group.amount-field input {
+    font-family: "Outfit", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
 }
 
 .modal-form-group input:focus,
@@ -104,10 +215,12 @@
     border-color: var(--accent);
     box-shadow: 0 0 0 3px var(--accent-glow);
     background: var(--bg-card);
+    outline: none;
 }
 
 .modal-form-group input::placeholder {
     color: var(--text-muted);
+    font-weight: 400;
 }
 
 .modal-form-group select option {
@@ -116,40 +229,97 @@
 }
 
 .field-error {
-    font-size: 0.75rem;
+    font-size: 0.73rem;
     color: var(--expense);
     margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
+/* ── Modal Actions ── */
 .modal-actions {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     margin-top: 4px;
 }
 
 .modal-actions .btn-secondary {
     flex: 0 0 auto;
     width: auto;
-    padding: 13px 20px;
+    padding: 12px 20px;
+    font-size: 0.875rem;
 }
 
 .modal-actions .btn-primary {
     flex: 1;
+    font-size: 0.875rem;
 }
 
-/* ── Responsive ── */
-@media (max-width: 480px) {
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+
+@media (max-width: 620px) {
+
+    /* Bottom-sheet on mobile */
+    .modal-backdrop {
+        align-items: flex-end;
+        padding: 0;
+    }
+
+    .modal-card {
+        max-width: 100%;
+        border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        animation: slideUp 0.28s cubic-bezier(0.34, 1.2, 0.64, 1);
+        max-height: 92vh;
+        overflow-y: auto;
+    }
+
     .modal-form-row {
         grid-template-columns: 1fr;
     }
 
-    .modal-card {
-        border-radius: var(--radius-lg);
+    .modal-header {
+        padding: 18px 20px 14px;
     }
 
-    .modal-header,
+    .modal-type-toggle,
     .modal-form {
         padding-left: 20px;
         padding-right: 20px;
+    }
+
+    .modal-form {
+        padding-bottom: 32px;
+    }
+}
+
+@media (max-width: 400px) {
+    .modal-header {
+        padding: 14px 16px;
+    }
+
+    .modal-type-toggle,
+    .modal-form {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .type-option {
+        font-size: 0.78rem;
+        padding: 9px 10px;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
