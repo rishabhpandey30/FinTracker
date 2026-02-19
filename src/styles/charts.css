@@ -12,8 +12,149 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* ── Header Controls ── */
+.charts-header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* ── Timeframe Pills ── */
+.charts-timeframe-pills {
+    display: flex;
+    gap: 4px;
+}
+
+.timeframe-pill {
+    padding: 4px 12px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+    background: var(--bg-input);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: "Inter", sans-serif;
+    letter-spacing: 0.3px;
+}
+
+.timeframe-pill:hover {
+    background: var(--accent-light);
+    border-color: var(--border-accent);
+    color: var(--accent);
+}
+
+.timeframe-pill.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 2px 8px var(--accent-glow);
+}
+
+/* ── Mini Stats Row ── */
+.charts-mini-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.charts-mini-stat {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: border-color var(--transition);
+}
+
+.charts-mini-stat:hover {
+    border-color: var(--border-2);
+}
+
+.mini-stat-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.mini-stat-value {
+    font-family: "Outfit", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
+}
+
+.mini-stat-value.income {
+    color: #10b981;
+}
+
+.mini-stat-value.expense {
+    color: var(--expense);
+}
+
+/* ── Chart Tab Bar ── */
+.charts-tab-bar {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 12px;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 4px;
+    width: fit-content;
+    flex-wrap: wrap;
+}
+
+.chart-tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: "Inter", sans-serif;
+    white-space: nowrap;
+}
+
+.chart-tab-btn svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+.chart-tab-btn:hover {
+    color: var(--text-primary);
+    background: var(--bg-card-hover);
+}
+
+.chart-tab-btn.active {
+    background: var(--bg-card);
+    color: var(--accent);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.chart-tab-btn.active svg {
+    opacity: 1;
 }
 
 .charts-title {
@@ -43,11 +184,9 @@
     flex-shrink: 0;
 }
 
-/* ── Charts Grid ── */
-.charts-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+/* ── Full-width chart card ── */
+.chart-card-full {
+    width: 100%;
 }
 
 /* ── Chart Card ── */
@@ -168,6 +307,22 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+}
+
+/* Wide donut layout (side-by-side) */
+.chart-body-donut-wide {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.chart-body-donut-wide .donut-wrap {
+    flex: 0 0 300px;
+}
+
+.chart-body-donut-wide .pie-legend {
+    flex: 1;
+    max-height: 260px;
 }
 
 .donut-wrap {
@@ -351,11 +506,43 @@
     .chart-card {
         padding: 20px;
     }
+
+    .charts-mini-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 900px) {
-    .charts-grid {
-        grid-template-columns: 1fr;
+    .charts-mini-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .chart-body-donut-wide {
+        flex-direction: column;
+    }
+
+    .chart-body-donut-wide .donut-wrap {
+        flex: none;
+        width: 100%;
+    }
+
+    .charts-tab-bar {
+        width: 100%;
+    }
+
+    .chart-tab-btn span {
+        display: none;
+    }
+
+    .chart-tab-btn {
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 640px) {
+    .charts-mini-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
     }
 }
 

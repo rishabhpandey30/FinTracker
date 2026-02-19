@@ -6,6 +6,7 @@ import TransactionList from "../components/TransactionList";
 import Charts from "../components/Charts";
 import TransactionModal from "../components/TransactionModal";
 import FloatingAddButton from "../components/FloatingAddButton";
+import ExportPanel from "../components/ExportPanel";
 import { useTransactions } from "../context/TransactionContext";
 import { useTheme } from "../context/ThemeContext";
 import "../styles/dashboard.css";
@@ -117,6 +118,7 @@ const Dashboard = () => {
 
                     <SummaryCards />
                     <Charts transactions={transactions} />
+                    <ExportPanel />
                     <Filters filters={filters} setFilters={setFilters} />
                     <TransactionList
                         transactions={filteredTransactions}

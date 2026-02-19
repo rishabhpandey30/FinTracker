@@ -373,6 +373,12 @@
     margin: 0;
 }
 
+.mobile-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .hamburger-btn {
     width: 36px;
     height: 36px;
@@ -385,6 +391,12 @@
     justify-content: center;
     gap: 4px;
     cursor: pointer;
+    transition: background var(--transition), border-color var(--transition);
+}
+
+.hamburger-btn:hover {
+    background: var(--accent-light);
+    border-color: var(--border-accent);
 }
 
 .ham-line {
@@ -393,12 +405,91 @@
     background: var(--text-secondary);
     border-radius: 2px;
     transition: all var(--transition);
+    display: block;
+}
+
+/* ── Sidebar Overlay (mobile) ── */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    z-index: 99;
+    animation: fadeInOverlay 0.2s ease;
+}
+
+@keyframes fadeInOverlay {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* ── Drawer close button (hidden on desktop) ── */
+.drawer-close-btn {
+    display: none;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition);
+    flex-shrink: 0;
+    z-index: 2;
+}
+
+.drawer-close-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+.drawer-close-btn:hover {
+    background: var(--expense-bg);
+    border-color: var(--expense);
+    color: var(--expense);
 }
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
+
+    /* Turn sidebar into a slide-in drawer */
     .sidebar {
-        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: min(280px, 80vw);
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: none;
+    }
+
+    .sidebar.sidebar-drawer-open {
+        transform: translateX(0);
+        box-shadow: 8px 0 40px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Overlay visible only on mobile */
+    .sidebar-overlay {
+        display: block;
+    }
+
+    /* Show close button inside drawer */
+    .drawer-close-btn {
+        display: flex;
     }
 
     .mobile-header {

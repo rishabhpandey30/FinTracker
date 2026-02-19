@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
@@ -8,6 +8,7 @@ const Navbar = ({ onAddClick }) => {
     const { currentUser, logout } = useAuth();
     const { theme, toggleTheme } = useTheme();
     const navigate = useNavigate();
+    const [drawerOpen, setDrawerOpen] = useState(false);
 
     const handleLogout = async () => {
         await logout();
@@ -20,11 +21,13 @@ const Navbar = ({ onAddClick }) => {
 
     const displayName = currentUser?.displayName || currentUser?.email?.split("@")[0] || "User";
 
+    const closeDrawer = () => setDrawerOpen(false);
+
     return (
         <>
             {/* ── Mobile Header ── */}
             <header className="mobile-header">
-                <Link to="/dashboard" className="sidebar-logo">
+                <Link to="/dashboard" className="sidebar-logo" onClick={closeDrawer}>
                     <div className="logo-mark">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                             <path d="M12 2L2 7l10 5 10-5-10-5z" />
@@ -34,19 +37,50 @@ const Navbar = ({ onAddClick }) => {
                     </div>
                     <span className="logo-wordmark">Fin<span>Track</span></span>
                 </Link>
-                <button className="topbar-add-btn" onClick={onAddClick} aria-label="Add transaction">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
-                    </svg>
-                    <span>Add</span>
-                </button>
+
+                <div className="mobile-header-actions">
+                    <button className="topbar-add-btn" onClick={onAddClick} aria-label="Add transaction">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+                        </svg>
+                        <span>Add</span>
+                    </button>
+
+                    <button
+                        className={`hamburger-btn${drawerOpen ? " open" : ""}`}
+                        onClick={() => setDrawerOpen(true)}
+                        aria-label="Open menu"
+                        aria-expanded={drawerOpen}
+                    >
+                        <span className="ham-line"></span>
+                        <span className="ham-line"></span>
+                        <span className="ham-line"></span>
+                    </button>
+                </div>
             </header>
 
-            {/* ── Sidebar ── */}
-            <aside className="sidebar">
+            {/* ── Mobile Drawer Overlay ── */}
+            {drawerOpen && (
+                <div
+                    className="sidebar-overlay"
+                    onClick={closeDrawer}
+                    aria-hidden="true"
+                />
+            )}
+
+            {/* ── Sidebar (desktop static + mobile drawer) ── */}
+            <aside className={`sidebar${drawerOpen ? " sidebar-drawer-open" : ""}`}>
+
+                {/* Mobile drawer close button */}
+                <button className="drawer-close-btn" onClick={closeDrawer} aria-label="Close menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
 
                 {/* Logo */}
-                <Link to="/dashboard" className="sidebar-logo">
+                <Link to="/dashboard" className="sidebar-logo" onClick={closeDrawer}>
                     <div className="logo-mark">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                             <path d="M12 2L2 7l10 5 10-5-10-5z" />
@@ -61,7 +95,7 @@ const Navbar = ({ onAddClick }) => {
                 <nav className="sidebar-nav">
                     <span className="nav-section-label">Main</span>
 
-                    <Link to="/dashboard" className="sidebar-link active">
+                    <Link to="/dashboard" className="sidebar-link active" onClick={closeDrawer}>
                         <svg className="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <rect x="3" y="3" width="7" height="7" rx="1" />
                             <rect x="14" y="3" width="7" height="7" rx="1" />
@@ -71,13 +105,27 @@ const Navbar = ({ onAddClick }) => {
                         Dashboard
                     </Link>
 
-                    <button className="sidebar-link sidebar-link-btn" onClick={onAddClick}>
+                    <button className="sidebar-link sidebar-link-btn" onClick={() => { onAddClick(); closeDrawer(); }}>
                         <svg className="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <circle cx="12" cy="12" r="10" />
                             <line x1="12" y1="8" x2="12" y2="16" />
                             <line x1="8" y1="12" x2="16" y2="12" />
                         </svg>
                         Add Transaction
+                    </button>
+
+                    <button className="sidebar-link sidebar-link-btn" onClick={() => {
+                        closeDrawer();
+                        setTimeout(() => {
+                            document.querySelector(".export-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }, 150);
+                    }}>
+                        <svg className="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Export Data
                     </button>
 
                     <span className="nav-section-label" style={{ marginTop: "8px" }}>Analytics</span>
@@ -99,7 +147,7 @@ const Navbar = ({ onAddClick }) => {
                     </div>
                 </nav>
 
-                {/* ── Footer — always visible, no dropdown ── */}
+                {/* ── Footer ── */}
                 <div className="sidebar-footer">
 
                     {/* User info card */}
